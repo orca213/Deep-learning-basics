@@ -1,4 +1,4 @@
-# Deeplearning 기초
+# Deeplearning Basics
 
 이 프로젝트는 딥러닝에 대한 기초 개념과 실습 코드를 포함하고 있습니다.
 

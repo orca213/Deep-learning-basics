@@ -2,3 +2,4 @@
 /Pytorch_sample
 *.zip
 *.pth
+__pycache__/

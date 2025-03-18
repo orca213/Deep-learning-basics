@@ -3,7 +3,13 @@
 # 변수 설정
 IMAGE_NAME="ubuntu_with_workspace"
 CONTAINER_NAME="ubuntu_container"
-WORKSPACE_PATH=$(pwd)
+
+# 현재 디렉토리 경로
+if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    WORKSPACE_PATH=$(pwd | sed 's|/c/|C:\\|')   # Windows일 경우
+else
+    WORKSPACE_PATH=$(pwd)                       # Windows가 아닌 경우
+fi
 
 # 이미지가 이미 있는지 확인
 if ! docker image inspect "$IMAGE_NAME" > /dev/null 2>&1; then

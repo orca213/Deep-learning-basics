@@ -1,36 +1,38 @@
-# Deeplearning Basics
+# Deep Learning Basics
 
-This project includes fundamental concepts of deep learning and practical code implementations.
+This project introduces fundamental concepts of deep learning along with practical code implementations.
 
 ## Installation
 
-1. Clone the repository
+### 1. Clone the Repository
+
+Run the following commands to clone the repository and navigate to the project directory:
 
 ```bash
 git clone https://github.com/orca213/Deep-learning-basics.git
 cd Deep-learning-basics
 ```
 
-2. Install Docker Desktop
+### 2. Install Docker Desktop
 
-You can download Docker from [here](https://www.docker.com/)
+Download and install Docker Desktop from [this link](https://www.docker.com/).
 
-3. Build Docker container
+### 3. Build the Docker Container
 
-Following container provides an Ubuntu environment for hands-on practice.
+Set up an Ubuntu-based environment for hands-on practice by running:
 
 ```bash
 bash docker/run_docker.sh
 ```
 
-4. Explore code
+### 4. Explore the Code
 
-The project covers the following topics, feel free to explore:
+This project covers the following topics:
 
-- Python Basics
-- Reinforcement Learning
-- Convolutional Neural Networks (CNN)
+- **Python Basics**
+- **Reinforcement Learning**
+- **Convolutional Neural Networks (CNN)**
 
-There are also some interesting side projects included:
+Additionally, it includes some interesting side projects:
 
-- Selenium
+- **Selenium**

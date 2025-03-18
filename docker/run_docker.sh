@@ -3,7 +3,7 @@
 # 변수 설정
 IMAGE_NAME="ubuntu_with_workspace"
 CONTAINER_NAME="ubuntu_container"
-WORKSPACE_PATH="C:\Users\박성제\문서\Deeplearning"
+WORKSPACE_PATH=$(pwd)
 
 # 이미지가 이미 있는지 확인
 if ! docker image inspect "$IMAGE_NAME" > /dev/null 2>&1; then

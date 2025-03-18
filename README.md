@@ -1,21 +1,36 @@
 # Deeplearning Basics
 
-이 프로젝트는 딥러닝에 대한 기초 개념과 실습 코드를 포함하고 있습니다.
+This project includes fundamental concepts of deep learning and practical code implementations.
 
-## 설치 방법
+## Installation
+
+1. Clone the repository
 
 ```bash
 git clone https://github.com/orca213/Deep-learning-basics.git
+cd Deep-learning-basics
 ```
 
-## 커리큘럼
+2. Install Docker Desktop
 
-### 1. 파이썬의 기초
+You can download Docker from [here](https://www.docker.com/)
 
-- [basics](https://github.com/orca213/Deep-learning-basics/tree/main/basics)    - 파이썬과 파이토치 라이브러리 기초 학습
+3. Build Docker container
 
-- [코딩 기초 트레이닝](https://school.programmers.co.kr/learn/challenges/training?order=recent&languages=python3&page=1)    - 프로그래머스 파이썬 기초 과정
+Following container provides an Ubuntu environment for hands-on practice.
 
-### 2. 강화학습
+```bash
+bash docker/run_docker.sh
+```
 
-- [RL](https://github.com/orca213/Deep-learning-basics/tree/main/RL)    - 강화학습 기초 학습
+4. Explore code
+
+The project covers the following topics, feel free to explore:
+
+- Python Basics
+- Reinforcement Learning
+- Convolutional Neural Networks (CNN)
+
+There are also some interesting side projects included:
+
+- Selenium

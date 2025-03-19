@@ -1,7 +1,5 @@
 gymnasium
 numpy
-torch
-torchvision
 matplotlib
 argparse
 selenium

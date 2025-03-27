@@ -1,5 +1,6 @@
 from metadrive.envs import MetaDriveEnv
 from metadrive.utils import clip
+from env.my_reward import my_reward_function
 
 class MyEnv(MetaDriveEnv):
     def __init__(self, config):
@@ -30,16 +31,12 @@ class MyEnv(MetaDriveEnv):
             lateral_factor = clip(1 - 2 * abs(lateral_now) / vehicle.navigation.get_current_lane_width(), 0.0, 1.0)
         else:
             lateral_factor = 1.0
-
-        # vehicle steering reward (hazardous)
-        # steering_last = clip((vehicle.last_current_action[0][0] + 1) / 2, 0.0, 1.0)
-        # steering_now = clip((vehicle.steering+ 1) / 2, 0.0, 1.0)
-        # steering_diff = abs(steering_now-steering_last)
-        # steering_factor = clip(steering_diff, 0.0, 1.0)
             
         reward = 0.0
         reward += self.config["driving_reward"] * (long_now - long_last) * lateral_factor * positive_road
-        reward += self.config["speed_reward"] * (vehicle.speed_km_h / vehicle.max_speed_km_h) * positive_road
+        # reward += self.config["speed_reward"] * (vehicle.speed_km_h / vehicle.max_speed_km_h) * positive_road
+        reward += my_reward_function(vehicle.speed_km_h) * positive_road
+        
 
         step_info["step_reward"] = reward
 

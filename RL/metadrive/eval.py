@@ -14,21 +14,24 @@ if __name__ == "__main__":
     # 환경 재설정 및 프레임 수집
     frames = []
     obs, _ = env.reset()
-    rewards = []
+    reward_log, speed_log = [], []
     total_reward = 0
     for _ in tqdm(range(1000), desc="Evaluating", unit="steps"):
         action, _ = model.predict(obs, deterministic=True)
         obs, reward, terminated, truncated, _ = env.step(action)
         total_reward += reward
+        speed_log.append(env.vehicle.speed)
         frame = env.render(mode="topdown", screen_record=True, window=False)
         frames.append(frame)
         if terminated or truncated:
             obs, _ = env.reset()
-            rewards.append(total_reward)
+            reward_log.append(total_reward)
             total_reward = 0
     
     env.close()
-    print(f"Average reward: {sum(rewards) / len(rewards)}")
+    
+    print(f"Average reward: {sum(reward_log) / len(reward_log):.4f}", end="\t")
+    print(f"Average speed: {sum(speed_log) / len(speed_log):.2f} km/h")
 
     # GIF 생성
     print("Rendering gif . . .", end="\t")

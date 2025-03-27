@@ -13,11 +13,18 @@ git clone https://github.com/orca213/Deep-learning-basics.git
 cd Deep-learning-basics
 ```
 
-### 2. Install Docker Desktop
+### 2. Environments
+
+Choose one of the following methods to set up your local practice environment.
+
+<details>
+    <summary>A. Docker</summary>
+
+### A.1 Install Docker Desktop
 
 Download and install Docker Desktop from [this link](https://www.docker.com/).
 
-### 3. Build the Docker Container
+### A.2 Build the Docker Container
 
 Set up an Ubuntu-based environment for hands-on practice by running:
 
@@ -25,7 +32,30 @@ Set up an Ubuntu-based environment for hands-on practice by running:
 bash docker/run_docker.sh
 ```
 
-### 4. Explore the Code
+</details>
+
+<details>
+    <summary>B. Vessl AI</summary>
+
+### B.1 Generate SSH key
+
+Generate local SSH key. Press enter twice after executing the following.
+
+```bash
+ssh-keygen -t rsa -C "vessl-ai"
+```
+
+### B.2 Register public key to Vessl-AI
+
+Copy the output and paste it in Vessl-AI > Profile > Account settings > General > SSH public keys > + Add key
+
+```bash
+cat ~/.ssh/id_rsa.pub
+```
+
+</details>
+
+## Project Contents
 
 This project covers the following topics:
 

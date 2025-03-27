@@ -2,6 +2,9 @@
 /Pytorch_sample
 *.zip
 *.pth
+*.gif
 __pycache__/
 data/
+gifs/
+models/
 .ipynb_checkpoints/

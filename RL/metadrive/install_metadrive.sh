@@ -6,9 +6,4 @@ apt-get install -y libglib2.0-0
 
 # requirements
 pip install stable_baselines3
-
-# install metadrive
-git clone https://github.com/metadriverse/metadrive.git
-cd metadrive
-
-pip install -e .
+pip install metadrive-simulator

@@ -33,12 +33,13 @@ class MyEnv(MetaDriveEnv):
             lateral_factor = 1.0
             
         reward = 0.0
-        reward += self.config["driving_reward"] * (long_now - long_last) * lateral_factor * positive_road
+        # reward += self.config["driving_reward"] * (long_now - long_last) * lateral_factor * positive_road
         # reward += self.config["speed_reward"] * (vehicle.speed_km_h / vehicle.max_speed_km_h) * positive_road
-        reward += my_reward_function(vehicle.speed_km_h) * positive_road
+        reward += my_reward_function(vehicle.speed_km_h, long_last, long_now) * positive_road
         
 
         step_info["step_reward"] = reward
+        step_info["driving_reward"] = long_now - long_last
 
         if self._is_arrive_destination(vehicle):
             reward = +self.config["success_reward"]

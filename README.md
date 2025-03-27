@@ -18,7 +18,7 @@ cd Deep-learning-basics
 Choose one of the following methods to set up your local practice environment.
 
 <details>
-    <summary>A. Docker</summary>
+    <summary>**A. Docker**</summary>
 
 ### A.1 Install Docker Desktop
 
@@ -35,7 +35,7 @@ bash docker/run_docker.sh
 </details>
 
 <details>
-    <summary>B. Vessl AI</summary>
+    <summary>**B. Vessl AI**</summary>
 
 ### B.1 Generate SSH key
 

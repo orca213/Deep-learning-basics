@@ -1,5 +1,6 @@
 import argparse
 
+
 def main():
     # Argument parser 생성
     parser = argparse.ArgumentParser(description="Simple CLI calculator using argparse")

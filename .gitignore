@@ -3,8 +3,10 @@
 *.zip
 *.pth
 *.gif
+*.pt
 __pycache__/
 data/
 gifs/
 models/
+result/
 .ipynb_checkpoints/

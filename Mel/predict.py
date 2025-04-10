@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import librosa
 import numpy as np
-from cnn import GenreCNN
+from cnn import GenreCNN_v2
 
 # 🔧 설정
 MODEL_PATH = "models/genre_cnn.pth"
@@ -26,7 +26,7 @@ def preprocess_audio(file_path, sr=22050, duration=30):
     return tensor
 
 # 📦 모델 로드
-model = GenreCNN(num_classes=len(GENRES))
+model = GenreCNN_v2(num_classes=len(GENRES))
 model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
 model.eval()
 

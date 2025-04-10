@@ -3,8 +3,12 @@ import torch
 import tarfile
 import librosa
 import numpy as np
+from tqdm import tqdm
 from torch.utils.data import Dataset
 
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 def download_dataset():
     # Try to download GTZAN dataset using kagglehub if not found
@@ -55,28 +59,28 @@ class GTZANDataset(Dataset):
         self.labels = []
         self.genres = genres
         self.sr = sr
-
-        for label, genre in enumerate(genres):
+        
+        print("📦 Loading GTZAN dataset...")
+        for label, genre in enumerate(tqdm(genres, desc="Genres")):
             genre_path = os.path.join(data_dir, genre)
-            for file in os.listdir(genre_path):
-                if file.endswith('.wav'):
-                    file_path = os.path.join(genre_path, file)
-                    try:
-                        y, sr = librosa.load(file_path, sr=sr, duration=duration)
-                        mel = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
-                        log_mel = librosa.power_to_db(mel)
+            files = [f for f in os.listdir(genre_path) if f.endswith('.wav')]
+            for file in tqdm(files, desc=f"{genre:>10}", leave=False):
+                file_path = os.path.join(genre_path, file)
+                try:
+                    y, sr = librosa.load(file_path, sr=sr, duration=duration)
+                    mel = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
+                    log_mel = librosa.power_to_db(mel)
 
-                        # Pad/truncate to fixed size
-                        if log_mel.shape[1] < 660:
-                            pad = 660 - log_mel.shape[1]
-                            log_mel = np.pad(log_mel, ((0,0),(0,pad)), mode='constant')
-                        else:
-                            log_mel = log_mel[:, :660]
+                    if log_mel.shape[1] < 660:
+                        pad = 660 - log_mel.shape[1]
+                        log_mel = np.pad(log_mel, ((0,0),(0,pad)), mode='constant')
+                    else:
+                        log_mel = log_mel[:, :660]
 
-                        self.data.append(log_mel)
-                        self.labels.append(label)
-                    except Exception as e:
-                        print(f"⚠️ Skipping {file_path}: {e}")
+                    self.data.append(log_mel)
+                    self.labels.append(label)
+                except Exception as e:
+                    print(f"⚠️ Skipping {file_path}: {e}")
 
     def __len__(self):
         return len(self.data)

@@ -5,7 +5,7 @@ import torch.nn as nn
 from tqdm import tqdm
 from torch.utils.data import DataLoader, random_split
 from dataset import GTZANDataset, download_dataset
-from cnn import GenreCNN
+from cnn import GenreCNN, GenreCNN_v2
 
 # Download the dataset if it doesn't exist
 download_dataset()
@@ -26,7 +26,7 @@ if __name__ == "__main__":
 
     # Model, loss, optimizer
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = GenreCNN(num_classes=len(GENRES)).to(device)
+    model = GenreCNN_v2(num_classes=len(GENRES)).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 
@@ -66,3 +66,4 @@ if __name__ == "__main__":
     if not os.path.exists("models"):
         os.makedirs("models")
     torch.save(model.state_dict(), "models/genre_cnn.pth")
+    print("Model saved to models/genre_cnn.pth")

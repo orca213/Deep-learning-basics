@@ -1,7 +1,7 @@
 import torch
 from PIL import Image
 import cv2
-import numpy as np
+import os
 
 # 모델 로드 (사전학습된 YOLOv5s 사용)
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
@@ -33,5 +33,6 @@ for _, row in cups.iterrows():
                 cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
 
 # 결과 저장 및 확인
+os.makedirs('result', exist_ok=True)
 cv2.imwrite('result/cafe_result.jpg', img_cv)
 print("감지 완료! 'result/cafe_result.jpg' 파일을 확인하세요.")

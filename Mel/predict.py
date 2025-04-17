@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn.functional as F
 import librosa
@@ -6,8 +7,11 @@ from cnn import GenreCNN_v2
 
 # 🔧 설정
 MODEL_PATH = "models/genre_cnn.pth"
-AUDIO_PATH = "data/example.mp3"
+AUDIO_PATH = "data"
 GENRES = ['classical', 'jazz', 'metal', 'pop', 'hiphop', 'rock', 'blues', 'country', 'reggae', 'disco']
+
+# 📂 오디오 파일 목록 가져오기
+file_list = [f for f in os.listdir(AUDIO_PATH) if os.path.isfile(os.path.join(AUDIO_PATH, f))]
 
 # 🔄 오디오 전처리 함수
 def preprocess_audio(file_path, sr=22050, duration=30):
@@ -31,19 +35,20 @@ model.load_state_dict(torch.load(MODEL_PATH, map_location=torch.device('cpu')))
 model.eval()
 
 # 🎧 오디오 불러오기 & 예측
-input_tensor = preprocess_audio(AUDIO_PATH)
-with torch.no_grad():
-    output = model(input_tensor)
-    probs = F.softmax(output, dim=1)
-    predicted_idx = torch.argmax(probs, dim=1).item()
-    predicted_genre = GENRES[predicted_idx]
+for filename in file_list:
+    print(f"\n🎧 Processing: {filename}")
 
-# 결과 출력
-predicted_idx = np.argmax(probs)
-predicted_genre = GENRES[predicted_idx]
+    filepath = os.path.join(AUDIO_PATH, filename)
+    input_tensor = preprocess_audio(filepath)
 
-print(f"🎵 Predicted Genre: {predicted_genre}")
-print("\n📊 Probabilities:")
-probs = probs.numpy().flatten()
-print(" | ".join([f"{genre:^10}" for genre in GENRES]))
-print(" | ".join([f"{prob:^10.4f}" for prob in probs]))
+    with torch.no_grad():
+        output = model(input_tensor)
+        probs = F.softmax(output, dim=1).numpy().flatten()
+        predicted_idx = np.argmax(probs)
+        predicted_genre = GENRES[predicted_idx]
+
+    # 출력
+    print(f"🎵 Predicted Genre: {predicted_genre}")
+    print("📊 Probabilities:")
+    print(" | ".join([f"{genre:^10}" for genre in GENRES]))
+    print(" | ".join([f"{prob:^10.4f}" for prob in probs]))

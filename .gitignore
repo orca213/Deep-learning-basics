@@ -11,3 +11,4 @@ models/
 result/
 .ipynb_checkpoints/
 genres/
+outputs/

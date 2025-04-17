@@ -4,8 +4,8 @@ from metadrive.component.navigation_module.node_network_navigation import NodeNe
 import logging
 
 CONFIG = {
-    "traffic_density": 0.1,
-    "accident_prob": 0.5,
+    "traffic_density": 0,
+    "accident_prob": 0,
     "crash_vehicle_done": True,
     "crash_object_done": True,
     "horizon": 1000,
@@ -19,7 +19,7 @@ CONFIG = {
         BaseMap.GENERATE_TYPE: MapGenerateMethod.BIG_BLOCK_NUM,
         BaseMap.GENERATE_CONFIG: 3,  # it can be a file path / block num / block ID sequence
         BaseMap.LANE_WIDTH: 4,
-        BaseMap.LANE_NUM: 5,
+        BaseMap.LANE_NUM: 4,
         "exit_length": 50,
         "start_position": [0, 0],
     },

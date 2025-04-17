@@ -15,7 +15,7 @@ plt.figure(figsize=(12, 6))
 for i, filename in enumerate(filenames):
     try:
         # Load and compute Mel Spectrogram
-        y, sr = librosa.load(filename, duration=10)
+        y, sr = librosa.load(filename, duration=30)
         mel_spec = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128)
         log_mel_spec = librosa.power_to_db(mel_spec, ref=np.max)
 

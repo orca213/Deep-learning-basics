@@ -4,6 +4,7 @@
 *.pth
 *.gif
 *.pt
+*.png
 __pycache__/
 data/
 gifs/

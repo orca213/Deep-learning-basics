@@ -4,7 +4,7 @@ from bicycle_model import BicycleModel
 from kalman_filter import KalmanFilter
 from controllers.lqr_controller import LQRController
 from controllers.mlp_controller import MLControllerWrapper
-from utils import generate_straight_trajectory, plot_results, compare_results
+from utils import generate_straight_trajectory, generate_sine_trajectory, plot_results, compare_results
 
 def get_kalman_matrices(dt=0.05):
     A = np.eye(4)
@@ -18,13 +18,14 @@ def get_kalman_matrices(dt=0.05):
     C[0, 0] = 1  # 측정: x
     C[1, 1] = 1  # 측정: y
 
-    Q = np.diag([0.2, 0.2, 0.2, 0.2])
-    R = np.diag([0.05, 0.05])
+    Q = np.diag([0.01, 0.01, 0.01, 0.1])
+    R = np.diag([0.1, 0.1])
 
     return A, B, C, Q, R
 
-def run_simulation(controller_type="lqr", steps=100, dt=0.1):
-    ref_traj = generate_straight_trajectory(steps, v_target=2.0, dt=dt)
+def run_simulation(controller_type="lqr", steps=200, dt=0.1):
+    # ref_traj = generate_straight_trajectory(steps, v_target=2.0, dt=dt)
+    ref_traj = generate_sine_trajectory(steps, v_target=2.0, dt=dt)
     A, B, C, Q, R = get_kalman_matrices(dt)
     x0 = ref_traj[0] + np.random.normal(0, 0.2, size=(4,))
     P0 = np.eye(4)

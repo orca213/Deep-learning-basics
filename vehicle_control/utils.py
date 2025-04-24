@@ -25,6 +25,16 @@ def generate_straight_trajectory(steps, v_target=2.0, dt=0.1):
         traj.append(np.array([x, y, yaw, v]))
     return np.array(traj)
 
+def generate_sine_trajectory(steps, v_target=2.0, dt=0.1, amplitude=2.0, frequency=0.1):
+    traj = []
+    for t in range(steps):
+        x = v_target * dt * t
+        y = amplitude * np.sin(frequency * x)
+        yaw = np.arctan2(amplitude * frequency * np.cos(frequency * x), 1.0)
+        v = v_target
+        traj.append(np.array([x, y, yaw, v]))
+    return np.array(traj)
+
 def compute_rmse(true_xy, ref_xy):
     error = true_xy - ref_xy
     mse = np.mean(np.sum(error ** 2, axis=1))
